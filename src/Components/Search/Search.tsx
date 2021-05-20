@@ -23,6 +23,7 @@ import { SnackbarOrigin } from "@material-ui/core";
 import Snackbar from "../Snackbar/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { Context } from "../../Context/Context";
+import {Helmet} from 'react-helmet'
 const SearchS = styled.div`
   .searchField {
     display: flex;
@@ -72,6 +73,9 @@ const Search = () => {
   });
   return (
     <SearchS>
+      <Helmet>
+        <title>بلاگر - جستجو در سایت</title>
+      </Helmet>
       {snack}
       <Breadcrumb
         link={[

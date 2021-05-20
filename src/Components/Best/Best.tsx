@@ -1,13 +1,13 @@
+import { Fragment } from "react";
 import { Typography, Box } from "@material-ui/core";
-import BestPageCarousel from './BestPageCarousel/BestPageCarousel'
+import BestPageCarousel from "./BestPageCarousel/BestPageCarousel";
 import { Helmet } from "react-helmet";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import BestPostCarousel from "./BestPostCarousel/BestPostCarousel";
-// import 'swiper/swiper.scss';
+import "swiper/swiper-bundle.min.css";
 const Best = () => {
-  
   return (
-    <>
+    <Fragment>
       <Box mb="20px" mt="10px">
         <Breadcrumb
           link={[
@@ -17,8 +17,7 @@ const Best = () => {
         />
       </Box>
       <Helmet>
-        <link rel="stylesheet" href="/style/Swiper/swiper-bundle.min.css" />
-        {/* <link rel="stylesheet" href="/style/Swiper/navigation.min.css" /> */}
+        <title>بلاگر - بهترین های سایت</title>
       </Helmet>
       <Box mb="4rem">
         <Typography align="center" variant="h4" component="p" className="title">
@@ -32,7 +31,7 @@ const Best = () => {
         </Typography>
       </Box>
       <BestPostCarousel />
-    </>
+    </Fragment>
   );
 };
 

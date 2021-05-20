@@ -5,6 +5,7 @@ import * as yup from "yup";
 import MyButton from "../Style/Matrial/Button/MyButton";
 
 import TextField from "@material-ui/core/TextField";
+import {Helmet} from 'react-helmet'
 const LoginS = styled.div`
   .form {
     margin: 70px auto;
@@ -45,6 +46,9 @@ const Login = () => {
   });
   return (
     <LoginS>
+      <Helmet>
+        <title>بلاگر - ورود به سایت</title>
+      </Helmet>
       <Breadcrumb
         link={[
           { title: "خانه", to: "/" },

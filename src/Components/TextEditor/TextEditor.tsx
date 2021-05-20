@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , Fragment } from "react";
 import { Helmet } from "react-helmet";
 import ReactQuill from "react-quill";
 import MyButton from "../Style/Matrial/Button/MyButton";
@@ -67,12 +67,12 @@ const TextEditor = () => {
     "link",
   ];
   const click = () => {
-    if (text.length === 0) {
-      console.log("request");
+    if (text.length !== 0) {
+      console.log("request" , text);
     }
   };
   return (
-    <>
+    <Fragment>
       <Helmet>
         <link rel="stylesheet" href="/style/Editor/quill.snow.css" />
       </Helmet>
@@ -90,7 +90,7 @@ const TextEditor = () => {
           ارسال
         </MyButton>
       </Box>
-    </>
+    </Fragment>
   );
 };
 

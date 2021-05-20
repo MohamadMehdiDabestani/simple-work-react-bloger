@@ -8,6 +8,7 @@ import Help from "../../Assets/Help.svg";
 import { Link } from "react-router-dom";
 import MyButton from "../Style/Matrial/Button/MyButton";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import { Helmet } from 'react-helmet';
 const BecomeBlogerS = styled.div`
   .text {
     p:first-child {
@@ -28,6 +29,9 @@ const BecomeBloger = () => {
   console.log("render BecomeBloger");
   return (
     <BecomeBlogerS>
+      <Helmet>
+        <title>بلاگر - راهنمای اولیه</title>
+      </Helmet>
       <Box mb="20px" mt="10px">
         <Breadcrumb
           link={[

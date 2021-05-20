@@ -8,6 +8,7 @@ import InfoSinglePost from "./InfoSinglePost/InfoSinglePost";
 import Snackbar from "../Snackbar/Snackbar";
 import ContentSinglePost from "./ContentSinglePost/ContentSinglePost";
 import Comment from "../Comment/Comment";
+import {Helmet} from 'react-helmet'
 interface Params {
   id?: string;
 }
@@ -35,7 +36,8 @@ const SinglePostS = styled.div`
     .comments {
       img {
         margin-top: 0 !important;
-        width: 100%;
+        width: 100%;import { Helmet } from 'ract-hem';
+
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
@@ -54,6 +56,9 @@ const SinglePost = () => {
   );
   return (
     <SinglePostS>
+      <Helmet>
+        <title>عنوان-پست</title>
+      </Helmet>
       {snack}
       <Box mb="20px" mt="10px">
         <Breadcrumb

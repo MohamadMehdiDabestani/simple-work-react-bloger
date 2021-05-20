@@ -2,7 +2,6 @@ import { Fragment, lazy, memo } from "react";
 import { Route, Switch } from "react-router";
 
 import Layout from "../Layout/Layout";
-
 const Router = () => {
   console.log("render router");
   const Main = lazy(() => import("../../Components/Main/Main"));
@@ -13,8 +12,11 @@ const Router = () => {
   const Register = lazy(() => import("../../Components/Register/Register"));
   const Search = lazy(() => import("../../Components/Search/Search"));
   const Best = lazy(() => import("../../Components/Best/Best"));
-  const SinglePost = lazy(() => import("../../Components/SinglePost/SinglePost"));
-  const UserPanel = lazy(()=> import("../../Components/UserPanel/UserPanel"));
+  const SinglePost = lazy(
+    () => import("../../Components/SinglePost/SinglePost")
+  );
+  const UserPanel = lazy(() => import("../../Components/UserPanel/UserPanel"));
+  const NotFound = lazy(() => import("../../Components/NotFound/NotFound"));
   return (
     <Fragment>
       <Layout>
@@ -27,7 +29,7 @@ const Router = () => {
           <Route path="/post/:id" component={SinglePost} />
           <Route path="/Userpanel" component={UserPanel} />
           <Route exact path="/" component={Main} />
-          <Route path="*" render={()=> <p>404</p>} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </Layout>
     </Fragment>
