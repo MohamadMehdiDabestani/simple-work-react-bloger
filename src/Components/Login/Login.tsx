@@ -1,23 +1,10 @@
-import { TextField } from "@material-ui/core";
-import { Fragment, useState, ChangeEvent, FormEvent } from "react";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import MyButton from "../Style/Matrial/Button/MyButton";
-import {
-  Form,
-  checkValue,
-  checkVlidateElForError,
-  checkValidateEl,
-  checkMinlength,
-} from "../Util/Util";
 import styled from "styled-components";
-interface State {
-  email: Form;
-  password: Form;
-}
-interface FormElement {
-  key: string;
-  el: Form;
-}
+import { useFormik } from "formik";
+import * as yup from "yup";
+import MyButton from "../Style/Matrial/Button/MyButton";
+
+import TextField from "@material-ui/core/TextField";
 const LoginS = styled.div`
   .form {
     margin: 70px auto;
@@ -30,101 +17,32 @@ const LoginS = styled.div`
     button {
       font-size: 16px;
     }
-    .error {
-      font-size: 13px;
-      color: var(--color_red);
-      margin-bottom: 10px;
-    }
+   
   }
 `;
+
+const validationSchema = yup.object({
+  email: yup
+    .string()
+    .email("یک ایمیل معتبر وارد کنید")
+    .required("یک ایمیل وارد کنید"),
+  password: yup
+    .string()
+    .min(8, "رمز عبور باید بیشتر از 8 رقم باشد")
+    .required("رمز عبور را وراد کنید"),
+});
 const Login = () => {
   console.log("render login");
-  const [formState, setFormState] = useState<State>({
-    email: {
-      name: "email",
-      type: "email",
-      isValid: false,
-      label: "ایمیل",
-      errorText: "",
-      value: "",
-      error: false,
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
     },
-    password: {
-      name: "password",
-      type: "password",
-      isValid: false,
-      label: "رمز عبور",
-      errorText: "",
-      value: "",
-      error: false,
-      minLength: 4,
-      errorMinLength: "",
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
     },
   });
-  const [isValid, setIsValid] = useState<boolean>();
-  const listOfStateEl: FormElement[] = [];
-  for (let key in formState) {
-    listOfStateEl.push({
-      key: key,
-      el: formState[key as keyof State],
-    });
-  }
-  const changeHandler = (
-    e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    let valueInput = e.target.value;
-    const formStateUpdate = {
-      ...formState,
-    };
-    const formStateEl = {
-      ...formState[e.target.name as keyof State],
-    };
-    formStateEl.value = valueInput;
-    formStateEl.errorText = checkValue(formStateEl, valueInput);
-    formStateEl.error = checkVlidateElForError(formStateEl);
-    formStateEl.isValid = checkValidateEl(formStateEl);
-    if (formStateEl.minLength) {
-      formStateEl.errorMinLength = checkMinlength(
-        formStateEl,
-        valueInput.length
-      );
-    }
-
-    formStateUpdate[e.target.name as keyof State] = formStateEl;
-    setFormState(formStateUpdate);
-    let valid = true;
-    for (let key in formState) {
-      valid = formState[key as keyof State].isValid && valid;
-    }
-    setIsValid(valid);
-  };
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (isValid) {
-      console.log("sub el => ", formState);
-    } else {
-      console.log("else el => ", formState);
-      const formStateUpdate = {
-        ...formState,
-      };
-
-      for (let key in formStateUpdate) {
-        let el = {
-          ...formState[key as keyof State],
-        };
-        if (!el.isValid) {
-          el.errorText = checkValue(el, el.value);
-          el.error = checkVlidateElForError(el);
-          if (el.minLength) {
-            el.errorMinLength = checkMinlength(el, el.minLength);
-          }
-
-          formStateUpdate[key as keyof State] = el;
-        }
-        setFormState(formStateUpdate);
-      }
-    }
-  };
   return (
     <LoginS>
       <Breadcrumb
@@ -133,26 +51,33 @@ const Login = () => {
           { title: "ورود", to: "/login", isActive: true },
         ]}
       />
-      <form className="form" onSubmit={submitHandler}>
-        {listOfStateEl.map((input: FormElement) => (
-          <Fragment key={input.key}>
-            <TextField
-              key={input.key}
-              value={input.el.value}
-              label={input.el.label}
-              variant="filled"
-              onChange={changeHandler}
-              error={input.el.error}
-              name={input.el.name}
-              type={input.el.type}
-            />
-            <p className="error">{input.el.errorText}</p>
-            <p className="error">{input.el.errorMinLength}</p>
-          </Fragment>
-        ))}
+      <form className="form" onSubmit={formik.handleSubmit}>
+        <TextField
+          fullWidth
+          name="email"
+          id="email"
+          label="ایمیل"
+          variant="filled"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+        />
+        <TextField
+          fullWidth
+          name="password"
+          id="password"
+          type="password"
+          label="رمز عبور"
+          variant="filled"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+        />
         <MyButton type="BlueLight" btnType="submit">
-          ورود
-        </MyButton>
+        ورود
+      </MyButton>
       </form>
     </LoginS>
   );

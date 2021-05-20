@@ -1,4 +1,4 @@
-import { FormEvent, ChangeEvent, useContext, useState } from "react";
+import { useContext } from "react";
 import {
   Grid,
   Paper,
@@ -10,17 +10,19 @@ import {
   FormLabel,
   RadioGroup,
 } from "@material-ui/core";
+
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import MyButton from "../Style/Matrial/Button/MyButton";
 import Card from "../Card/Card";
 import Image from "../../Assets/3424974.jpg";
-import { Context } from "../../Context/Context";
+
 import styled from "styled-components";
-interface State {
-  title?: string;
-  category?: string;
-  errorText?: string;
-}
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { SnackbarOrigin } from "@material-ui/core";
+import Snackbar from "../Snackbar/Snackbar";
+import Alert from "@material-ui/lab/Alert";
+import { Context } from "../../Context/Context";
 const SearchS = styled.div`
   .searchField {
     display: flex;
@@ -34,57 +36,50 @@ const SearchS = styled.div`
       width: 85%;
     }
   }
-  p.error {
-    color: $color_red;
-    font-size: 13px;
-    margin-right: 2%;
-  }
 `;
+const validation = yup.object({
+  title: yup.string(),
+  category: yup.string(),
+});
+const positionSnack: SnackbarOrigin = {
+  vertical: "top",
+  horizontal: "center",
+};
 const Search = () => {
+  const { setOpenModal } = useContext(Context);
+  const snack = (
+    <Snackbar position={positionSnack} duration={2000}>
+      <Alert variant="filled" severity="error">
+        یک متن وارد کنید و یا دسته بندی ای را انتخاب کنید
+      </Alert>
+    </Snackbar>
+  );
   console.log("render Search");
-  const { setIsErrorFormValidate, isErrorFormValidate } = useContext(Context);
-  const [formState, setFormState] = useState<State>({
-    title: "",
-    category: "",
-    errorText: "",
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      category: "",
+    },
+    validationSchema: validation,
+    onSubmit: (values) => {
+      if (values.title.trim() === "" && values.category.trim() === "") {
+        setOpenModal(true);
+      }else {
+
+        alert(JSON.stringify(values));
+      }
+    },
   });
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (formState.category === "" && formState.title === "") {
-      setFormState({
-        ...formState,
-        errorText: "متنی را وارد کنید",
-      });
-      setIsErrorFormValidate(true);
-    } else {
-      setFormState({
-        ...formState,
-        errorText: "",
-      });
-      setIsErrorFormValidate(false);
-      console.log("request to back", formState);
-    }
-  };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length >= 0) {
-      console.log("if");
-      setIsErrorFormValidate(false);
-      setFormState({
-        ...formState,
-        errorText: "",
-        [e.target.name as keyof State]: e.target.value,
-      });
-    }
-  };
   return (
     <SearchS>
+      {snack}
       <Breadcrumb
         link={[
           { title: "خانه", to: "/" },
           { title: "جستجو", to: "/search", isActive: true },
         ]}
       />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={3}>
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
             <Box mt="20px" p="1rem" component={Paper}>
@@ -93,42 +88,39 @@ const Search = () => {
                   label="عنوان پست را وارد کنید"
                   variant="filled"
                   name="title"
-                  onChange={handleChange}
-                  value={formState.title}
-                  error={isErrorFormValidate}
+                  value={formik.values.title}
+                  onChange={formik.handleChange}
                 />
                 <MyButton type="Green" btnType="submit">
                   جستجو
                 </MyButton>
               </div>
-              <p className="error">{formState.errorText}</p>
             </Box>
           </Grid>
           <Grid item xl={3} lg={3} md={3} sm={3} xs={12}>
             <Box p="1rem" component={Paper}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">دسته بندی</FormLabel>
-                <RadioGroup
-                  aria-label="Category"
-                  name="Category"
-                  onChange={handleChange}
-                >
+                <RadioGroup aria-label="Category" name="Category">
                   <FormControlLabel
                     value="سرگرمی"
                     control={<Radio color="primary" />}
                     label="سرگرمی"
                     name="category"
+                    onChange={formik.handleChange}
                   />
                   <FormControlLabel
                     value="ورزشی"
                     control={<Radio color="primary" />}
                     label="ورزشی"
                     name="category"
+                    onChange={formik.handleChange}
                   />
                   <FormControlLabel
                     value="خبری"
                     control={<Radio color="primary" />}
                     label="خبری"
+                    onChange={formik.handleChange}
                     name="category"
                   />
                 </RadioGroup>
