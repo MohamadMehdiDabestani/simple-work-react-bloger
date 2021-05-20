@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!--<link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
     <title></title>
     <link rel="stylesheet" href="/style/GlobalStyle.css" />
@@ -12,4 +12,18 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-V3N7SM4R3X"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-V3N7SM4R3X");
+    console.log("Google Analytics Started");
+  </script>
 </html>
