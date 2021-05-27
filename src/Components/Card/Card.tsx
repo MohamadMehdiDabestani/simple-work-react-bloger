@@ -15,13 +15,14 @@ import styled from "styled-components";
 import Share from "../Icon/Share";
 import Like from "../Icon/Like";
 export interface Props {
-  cardText: string;
-  cardDate: string;
-  cardTitle: string;
-  cardImage: string;
-  link: string;
-  logo: string;
-  imageTitle: string;
+  postDescription: string;
+  createDate: string;
+  postTitle: string;
+  imageName: string;
+  postId: number;
+  avatarName: string;
+  altImage: string;
+  userName: string;
 }
 const CardS = styled.div`
   .imgaCard {
@@ -61,15 +62,15 @@ const Card: FC<Props> = (props) => {
         className="headerCard"
         avatar={
           <Avatar className="logoCrad" aria-label="recipe">
-            <img src={props.logo} alt="LOGO" />
+            <img src={props.imageName} />
           </Avatar>
         }
-        title={props.cardTitle}
-        subheader={props.cardDate}
+        title={props.postTitle}
+        subheader={props.createDate}
       />
       <CardMedia
-        image={props.cardImage}
-        title={props.imageTitle}
+        image={props.imageName}
+        title={props.altImage}
         className="imgaCard"
       />
       <CardContent>
@@ -80,7 +81,7 @@ const Card: FC<Props> = (props) => {
           component="p"
           noWrap
         >
-          {props.cardText}
+          {props.postDescription}
         </Typography>
         <Box
           textAlign="left"
@@ -88,7 +89,7 @@ const Card: FC<Props> = (props) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Link to={props.link}>
+          <Link to={`/post/${props.postId}`}>
             <MyButton isSmall type="BlueLight" className="right">
               ادامه
             </MyButton>

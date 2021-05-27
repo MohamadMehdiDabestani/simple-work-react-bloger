@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { Box, Grid, Typography, Container } from "@material-ui/core";
 import styled from "styled-components";
-import Image from "../../Assets/email-pattern.png"
+import Image from "../../Assets/email-pattern.png";
 const FooterS = styled.footer`
   width: 100%;
   height: auto;
@@ -39,11 +40,7 @@ const Footer = () => {
                 ارتباط با من
               </Typography>
               <Box mt="15px">
-                <Typography
-                  component="p"
-                  align="center"
-                  className="textFooter"
-                >
+                <Typography component="p" align="center" className="textFooter">
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
                   استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید
                   سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
@@ -58,11 +55,7 @@ const Footer = () => {
                 لینک های مفید
               </Typography>
               <Box mt="15px">
-                <Typography
-                  component="p"
-                  align="center"
-                  className="textFooter"
-                >
+                <Typography component="p" align="center" className="textFooter">
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
                   استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید
                   سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.

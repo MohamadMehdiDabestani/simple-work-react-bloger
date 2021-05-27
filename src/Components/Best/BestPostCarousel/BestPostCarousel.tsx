@@ -4,13 +4,14 @@ import Card from "../../Card/Card";
 import Logo from "../../../Assets/3424974.jpg";
 import styled from "styled-components";
 const PropsCard = {
-  cardText: "Text",
-  cardDate: "1400/1/1",
-  cardTitle: "Title",
-  cardImage: Logo,
-  link: "Post/id",
-  logo: Logo,
-  imageTitle: "alt image",
+  postDescription: "Text",
+  createDate: "1400/1/1",
+  postTitle: "Title",
+  imageName: Logo,
+  postId: 2,
+  altImage: "alt image",
+  userName: "User Name",
+  avatarName: Logo,
 };
 const BestPostCarouselS = styled.div`
   height: 465px;

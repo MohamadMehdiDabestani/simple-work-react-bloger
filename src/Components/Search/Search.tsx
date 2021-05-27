@@ -23,7 +23,7 @@ import { SnackbarOrigin } from "@material-ui/core";
 import Snackbar from "../Snackbar/Snackbar";
 import Alert from "@material-ui/lab/Alert";
 import { Context } from "../../Context/Context";
-import {Helmet} from 'react-helmet'
+import { Helmet } from "react-helmet";
 const SearchS = styled.div`
   .searchField {
     display: flex;
@@ -65,8 +65,7 @@ const Search = () => {
     onSubmit: (values) => {
       if (values.title.trim() === "" && values.category.trim() === "") {
         setOpenModal(true);
-      }else {
-
+      } else {
         alert(JSON.stringify(values));
       }
     },
@@ -137,35 +136,38 @@ const Search = () => {
               <Grid container spacing={3}>
                 <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
                   <Card
-                    cardText="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
-                    cardTitle="Title"
-                    cardDate="1400/1/1"
-                    logo={Image}
-                    link="/Post/5501"
-                    imageTitle="Alt Image"
-                    cardImage={Image}
+                    postDescription="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
+                    postTitle="Title"
+                    createDate="1400/1/1"
+                    imageName={Image}
+                    avatarName={Image}
+                    postId={2}
+                    altImage="Alt Image"
+                    userName="User Name"
                   />
                 </Grid>
                 <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
                   <Card
-                    cardText="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
-                    cardTitle="Title"
-                    cardDate="1400/1/1"
-                    logo={Image}
-                    link="/Post/5501"
-                    imageTitle="Alt Image"
-                    cardImage={Image}
+                    postDescription="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
+                    postTitle="Title"
+                    createDate="1400/1/1"
+                    imageName={Image}
+                    avatarName={Image}
+                    postId={2}
+                    altImage="Alt Image"
+                    userName="User Name"
                   />
                 </Grid>
                 <Grid item xl={6} lg={6} md={6} sm={6} xs={12}>
                   <Card
-                    cardText="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
-                    cardTitle="Title"
-                    cardDate="1400/1/1"
-                    logo={Image}
-                    link="/Post/{id}"
-                    imageTitle="Alt Image"
-                    cardImage={Image}
+                    postDescription="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
+                    postTitle="Title"
+                    createDate="1400/1/1"
+                    imageName={Image}
+                    avatarName={Image}
+                    postId={2}
+                    altImage="Alt Image"
+                    userName="User Name"
                   />
                 </Grid>
               </Grid>

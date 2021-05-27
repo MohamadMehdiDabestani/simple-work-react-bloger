@@ -1,79 +1,38 @@
+import { Fragment, useState, useEffect, useContext } from "react";
 import Card from "../../../Card/Card";
-import Image from "../../../../Assets/3424974.jpg";
 import { Props } from "../../../Card/Card";
 import { Grid } from "@material-ui/core";
-const CardsList: Props[] = [
-  {
-    cardDate: "1400/1/1",
-    cardImage: Image,
-    cardText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-    cardTitle: "Title",
-    link: "/Post/1",
-    logo: Image,
-    imageTitle: "title",
-  },
-  {
-    cardDate: "1400/1/1",
-    cardImage: Image,
-    cardText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-    cardTitle: "Title",
-    link: "/Post/1",
-    logo: Image,
-    imageTitle: "title",
-  },
-  {
-    cardDate: "1400/1/1",
-    cardImage: Image,
-    cardText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-    cardTitle: "Title",
-    link: "/Post/1",
-    imageTitle: "title",
-    logo: Image,
-  },
-  {
-    cardDate: "1400/1/1",
-    cardImage: Image,
-    cardText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-    cardTitle: "Title",
-    link: "/Post/1",
-    logo: Image,
-    imageTitle: "title",
-  },
-  {
-    cardDate: "1400/1/1",
-    cardImage: Image,
-    cardText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-    cardTitle: "Title",
-    link: "/Post/1",
-    logo: Image,
-    imageTitle: "title",
-  },
-  {
-    cardDate: "1400/1/1",
-    cardImage: Image,
-    cardText:
-      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-    cardTitle: "Title",
-    link: "/Post/1",
-    logo: Image,
-    imageTitle: "title",
-  },
-];
+import axios from "../../../../Axios/";
+import AxiosRequestError from "../../../../Container/Error/AxiosRequestError";
+import { Context } from "../../../../Context/Context";
+import { CustomAxiosError } from "../../../../util/Util";
 const CardList = () => {
+  const { setOpenModal, setIsRequestError } = useContext(Context);
+  const [list, setList] = useState<Props | null>(null);
+  useEffect(() => {
+    if (!list) {
+      axios
+        .get("/GetAllPost")
+        .then((res) => {
+          let result : Props = res.data;
+          setList(result);
+        })
+        .catch((err: CustomAxiosError) => {
+          setIsRequestError(err);
+        });
+      }
+    }, []);
+    console.log('list' , list);
   return (
-    <>
-      {CardsList.map((c: Props, idx: number) => (
+    <Fragment>
+      {/* {CardsList.map((c: Props, idx: number) => (
         <Grid item xl={4} lg={4} md={4} sm={6} xs={12} key={idx}>
           <Card {...c} />
         </Grid>
-      ))}
-    </>
+      ))} */}
+      <p>last post</p>
+    </Fragment>
   );
 };
 
-export default CardList;
+export default AxiosRequestError(CardList);
